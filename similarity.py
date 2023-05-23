@@ -5,28 +5,33 @@ import pandas as pd
 
 nltk.download('stopwords')
 nltk.download('punkt')
-stop_words = set(nltk.corpus.stopwords.words('english')) 
+stop_words = set(nltk.corpus.stopwords.words('english'))
+
 
 def purifyText(string):
     words = nltk.word_tokenize(string)
-    return (" ".join([word for word in words if word not in stop_words]))
+    return " ".join([word for word in words if word not in stop_words])
+
 
 def webVerify(string, results_per_sentence):
     sentences = nltk.sent_tokenize(string)
     matching_sites = []
+
     for url in websearch.searchBing(query=string, num=results_per_sentence):
         matching_sites.append(url)
+
     for sentence in sentences:
-        for url in websearch.searchBing(query = sentence, num = results_per_sentence):
+        for url in websearch.searchBing(query=sentence, num=results_per_sentence):
             matching_sites.append(url)
 
-    return (list(set(matching_sites)))
+    return list(set(matching_sites))
+
 
 def similarity(str1, str2):
-    return (SequenceMatcher(None,str1,str2).ratio())*100
+    return SequenceMatcher(None, str1, str2).ratio() * 100
+
 
 def report(text):
-
     matching_sites = webVerify(purifyText(text), 2)
     matches = {}
 
@@ -39,35 +44,30 @@ def report(text):
 
 
 def returnTable(dictionary):
-
-    df = pd.DataFrame({'Similarity (%)': dictionary})
-    df.head(20).style.set_table_styles(
-    [{'selector': 'th',
-    'props': [('background', '#7CAE00'), 
-                ('color', 'white'),
-                ('font-family', 'verdana')]},
-    
-    {'selector': 'td',
-    'props': [('font-family', 'verdana')]},
-
-    {'selector': 'tr:nth-of-type(odd)',
-    'props': [('background', '#DCDCDC')]}, 
-    
-    {'selector': 'tr:nth-of-type(even)',
-    'props': [('background', 'white')]},
-    
-    {'selector': 'tr:hover',
-    'props': [('background-color', 'yellow')]}
-
-    ]
+    df = pd.DataFrame({"Matching Site": dictionary.keys(), "Similarity (%)": dictionary.values()})
+    df["Visit site "] = df["Matching Site"].apply(lambda x: f'<a href="{x}" target="_blank"><button style="background-color: #e67e22; color: #ecf0f1; border: 1px solid #f39c12; border-radius: 5px; padding: 10px;">Open Link</button></a>')
+    df = df.head(20).style.set_table_styles(
+        [
+            {
+                "selector": "th",
+                "props": [
+                    ("background", "#7CAE00"),
+                    ("color", "white"),
+                    ("font-family", "verdana"),
+                ],
+            },
+            {"selector": "td", "props": [("font-family", "verdana")]},
+            {"selector": "tr:nth-of-type(odd)", "props": [("background", "#DCDCDC")]},
+            {"selector": "tr:nth-of-type(even)", "props": [("background", "white")]},
+            {"selector": "tr:hover", "props": [("background-color", "yellow")]},
+        ]
     ).hide_index()
-  
-  
-    #df = df.fillna(' ').T
-    #df = df.transpose()
+
+    return df.render()
 
 
-    return df.to_html()
 
-if __name__ == '__main__':
-    report('This is a pure test')
+
+
+if __name__ == "__main__":
+    report("This is a pure test")
