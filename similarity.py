@@ -43,27 +43,29 @@ def report(text):
     return matches
 
 
+
 def returnTable(dictionary):
     df = pd.DataFrame({"Matching Site": dictionary.keys(), "Similarity (%)": dictionary.values()})
-    df["Visit site "] = df["Matching Site"].apply(lambda x: f'<a href="{x}" target="_blank"><button style="background-color: #e67e22; color: #ecf0f1; border: 1px solid #f39c12; border-radius: 5px; padding: 10px;">Open Link</button></a>')
-    df = df.head(20).style.set_table_styles(
-        [
-            {
-                "selector": "th",
-                "props": [
-                    ("background", "#7CAE00"),
-                    ("color", "white"),
-                    ("font-family", "verdana"),
-                ],
-            },
-            {"selector": "td", "props": [("font-family", "verdana")]},
-            {"selector": "tr:nth-of-type(odd)", "props": [("background", "#DCDCDC")]},
-            {"selector": "tr:nth-of-type(even)", "props": [("background", "white")]},
-            {"selector": "tr:hover", "props": [("background-color", "yellow")]},
-        ]
-    ).hide_index()
+    df["Visit site"] = df["Matching Site"].apply(lambda x: f'<button onclick="window.open(\'{x}\', \'_blank\')" style="background-color: #e67e22; color: #ecf0f1; border: 1px solid #f39c12; border-radius: 5px; padding: 10px; cursor: pointer;">Open Link</button>')
 
-    return df.render()
+    html_table = '<table style="width: 100%; border-collapse: collapse; border: solid #000 1px;">'
+    html_table += '<tr style="background: #7CAE00; color: white; font-family: verdana; border: solid #000 1px; ">'
+    html_table += '<th style="padding: 10px; border: solid #000 1px; ">Matching Site</th>'
+    html_table += '<th style="padding: 10px; border: solid #000 1px;">Similarity (%)</th>'
+    html_table += '<th style="padding: 10px; border: solid #000 1px;">Visit site</th>'
+    html_table += '</tr>'
+
+    for _, row in df.head(20).iterrows():
+        html_table += '<tr style="background: #DCDCDC;">'
+        html_table += f'<td style="padding: 10px; max-width: 2.5cm; word-wrap: break-word;">{row["Matching Site"]}</td>'
+        html_table += f'<td style="padding: 10px;">{row["Similarity (%)"]}</td>'
+        html_table += f'<td style="padding: 10px;">{row["Visit site"]}</td>'
+        html_table += '</tr>'
+
+    html_table += '</table>'
+    
+    return html_table
+
 
 
 
