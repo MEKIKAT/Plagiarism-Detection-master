@@ -6,37 +6,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Result</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+       .head-title{
+      padding: 6px;
+      border-radius: 10px;
+      display: flex;
+      flex-wrap: nowrap;
+    }
+    </style>
+
 </head>
-<body style="background-color: rgb(228, 228, 228);">
+<body >
+
+  <div class="container"  style="box-shadow: 0px 0px 20px rgba(80, 17, 186, 0.8) ;background-color: white; border-radius: 10px;">
+    <div  style="background: white; border-radius: 10px;">
+    </div><nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="head-title" >
+        <div class="head-title">
+        <img src="static/isu-logo.png" alt="" srcset="" style="width: 50px; margin-right: 9px;">
+        <h2>Isabela State University</h3>
+      </div>
+    </div>
   
- 
-      <div class="container border shadow" style="background-color: white; border: solid #000000; border-radius: 10px; text-align: center; padding-top: 10px; margin-top:  0.4cm; margin-bottom: 1cm; padding-bottom: 1cm;" >
-       
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <img src="static/compliance.png"  style="width: 1cm;" alt="">
-            <h2 style="font-family: Arial Black, Gadget, sans-serif;">Thesis Members</h2>
-            
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-              <ul class="navbar-nav">
-                <li class="nav-item">
-                  <a class="nav-link btn btn-outline-dark " style="border: none;" href="/">Home</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link btn btn-outline-secondary"  style="border: none;" href="/members">Members</a>
-                </li>
-              </ul>
-            </div>
-          </nav>
-<!---->
-          <div class="container">
+      
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link btn btn-outline-dark " style="border: none;" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link btn btn-outline-secondary"  style="border: none;" href="/members">Members</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+  
+
+      <div class="container" style="box-shadow: 0px 0px 20px rgba(80, 17, 186, 0.8) ;background-color: white; border-radius: 10px; text-align: center; padding-top: 10px; margin-top:  0.4cm; margin-bottom: 1cm; padding-bottom: 1cm; " >
+          <div class="container" >
             <div class="row">
               <div class="col-md-12 text-center">
                 <h2>Thesis Adviser</h2>
                 <hr>
-                <img style="width: 185px; height: 200px; "src="https://scontent.fmnl33-2.fna.fbcdn.net/v/t39.30808-6/341519432_936980647342610_7577353093770430976_n.jpg?stp=cp6_dst-jpg&_nc_cat=104&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=moYzdkhbCc4AX-ycFi6&_nc_ht=scontent.fmnl33-2.fna&oh=00_AfDq-NGIrfR3WYNYFFC81BLGBoMVtaI-LJx8VMEUluLdsw&oe=64705597" class="card-img-top" alt="Thesis Adviser Image">
+                <img style="width: 185px; height: 200px; "src="static/joe.jpg" class="card-img-top" alt="Thesis Adviser Image">
                 <h5>Joe Lagarteja</h5>
               </div>
             </div>
@@ -45,7 +61,7 @@
                 <div class="card text-center">
                   <div class="card-body">
                     <h5 class="card-title">Member 1</h5>
-                    <img  style="width: 185px; height: 200px; " src="https://scontent.fmnl33-3.fna.fbcdn.net/v/t39.30808-1/324244845_1392423384826998_7003883160698277509_n.jpg?stp=c0.0.200.200a_dst-jpg_p200x200&_nc_cat=110&ccb=1-7&_nc_sid=7206a8&_nc_ohc=Y4dZUp9merMAX_MKwNb&_nc_ht=scontent.fmnl33-3.fna&oh=00_AfA9fcsDg1yAFJ3dmjT1yyZhgSqBhuWxZ2eeIDbhbigA3g&oe=646FD9EC" class="card-img-top" alt="" style="height: 400px;">
+                    <img  style="width: 185px; height: 200px; " src="static/herwen.jpg" class="card-img-top" alt="" style="height: 400px;">
  
                     <hr>
                     <p class="card-text">Herwen Marinay Ballesteross</p>
@@ -56,7 +72,7 @@
                 <div class="card text-center">
                   <div class="card-body">
                     <h5 class="card-title">Member 2</h5>
-                    <img  style="width: 185px; height: 200px; " src="https://scontent.fmnl33-1.fna.fbcdn.net/v/t39.30808-1/271693260_939953680248534_4029624154766488888_n.jpg?stp=dst-jpg_p200x200&_nc_cat=108&ccb=1-7&_nc_sid=f67be1&_nc_ohc=WQYLHaZnW3AAX9hVpzc&_nc_oc=AQnKo4r5rqMxuCK4n0Mr2CVf_3A5bm0LWITkVviTct_7FHOXTuFxb1GXHxh5UKYvLWs&_nc_ht=scontent.fmnl33-1.fna&oh=00_AfAs7lE0zeY62fgmFEa8Z1GsLRnN0YFm7cXfNEfcs1PUTg&oe=646FBD06" class="card-img-top" alt="" style="height: 400px;">
+                    <img  style="width: 185px; height: 200px; " src="static/joyce.jpg" class="card-img-top" alt="" style="height: 400px;">
  
                     <hr>
                     <p class="card-text">Joyce Devilar Tamundong</p>
