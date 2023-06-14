@@ -6,7 +6,7 @@ import string
 app = Flask(__name__)
 
 local_archive_directory = 'local_archive'
-k = 3 
+k = 3 # Value of k for k-gram similarity
 
 def detect_plagiarism(submitted_text):
     plagiarism_report = ""
