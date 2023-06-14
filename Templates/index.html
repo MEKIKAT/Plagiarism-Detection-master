@@ -1,88 +1,101 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Plagiarism Detector</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <style>
-    .button {
-      color: #ecf0f1;
-      width: 10cm;
-      font-size: 17px;
-      background-color: #e67e22;
-      border: 1px solid #f39c12;
-      border-radius: 5px;
-      padding: 10px;
-      box-shadow: 0px 6px 0px #d35400;
-      transition: all .1s;
-    }
-
-    .button:active {
-      box-shadow: 0px 2px 0px #d35400;
-      position: relative;
-      top: 2px;
-    }
-    
-
-    .container{
-     
-      box-shadow: 0px 0px 20px rgba(80, 17, 186, 0.8) ;
-      border-radius: 10px;
-    }
-    .head-title{
-      padding: 6px;
-      border-radius: 10px;
-      display: flex;
-      flex-wrap: nowrap;
-    }
-  </style>
-</head>
-<body >
-<div class="container">
-  <div  style="background: white; border-radius: 10px;">
-  </div><nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="head-title">
-      <div class="head-title">
-      <img src="static/isu-logo.png" alt="" srcset="" style="width: 50px; margin-right: 9px;">
-      <h2>Isabela State University</h3>
-    </div>
-    </div>
-
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link btn btn-outline-dark " style="border: none;" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link btn btn-outline-secondary"  style="border: none;" href="/members">Members</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-</div>
-
-
-  <div class="container" style="margin-top: 0.4cm; background-color: white;">
-        <h3 style="padding-left: 1cm;">Thesis Plagiarism Detector</h3>
-    <form action="/report" method="POST">
-      <div class="form-group">
-        <textarea style="height: 10cm;" class="form-control" id="text" name="text" rows="2" placeholder="Paste your text here...."></textarea>
-      </div>
-      <div style="text-align: center;">
+    <title>Plagiarism Detector</title>
+    <!-- Add Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
         
-        <button class="button">Click Here</button>
+        .container {
+            max-width: 1000px;
+            margin-top: 50px;
+            box-shadow: 8px 14px 31px -7px rgba(0,0,0,1);
+                -webkit-box-shadow: 8px 14px 31px -7px rgba(0,0,0,1);
+                -moz-box-shadow: 8px 14px 31px -7px rgba(0,0,0,1);
+            border-radius: 10px;
 
-        <p class="mt-1" style="color: gray;">(You will be redirected once your report is generated.)</p>
-        <p style="padding-bottom: 1cm;"><b>Time to generate report depends on the length of text.</b></p>
-      </div>
-    </form> 
-  </div>
+            padding-top: 1cm;
+            padding-bottom: 10px;
+            text-align: center;
+        }
+        
+        .form-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        pre {
+            white-space: pre-wrap;
+            background-color: #f8f9fa;
+            padding: 15px;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+        }
+        
+        .no-plagiarism {
+            text-align: center;
+            margin-top: 30px;
+            color: rgb(9, 255, 0)
+        }
 
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        .plagiarize{
+            text-align: center;
+            margin-top: 30px;
+            color: red
+        }
+        
+        .img-logo{
+            width: 2cm;
+        }
+        .img{
+            width: 10cm;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-header">
+            <h2>Plagiarism Detector<br>Local Arhive </h2>
+            <img  class="img-logo" src="{{ url_for('static', filename='FINAL_SEAL.png') }}" alt="" srcset="">
+        </div>
+        <form method="POST" action="/detect-plagiarism">
+            <div class="form-group">
+                <label for="text">Paste your Text here</label>
+                <textarea class="form-control" name="text" rows="8" placeholder="Paste or type your text here..." required></textarea>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Detect Plagiarism from local</button>
+            </div>
+        </form>
+    </div>
+
+    
+    <div class="container">
+        <h1>Plagiarism Report</h1>
+        {% if report == "No plagiarism detected." %}
+            <div class="no-plagiarism">
+                <img  class="img" src="{{ url_for('static', filename='not_pla.png') }}" alt="" srcset="">
+                
+               
+            </div>
+        {% else %}
+            <img  class="img" src="{{ url_for('static', filename='plagarize.png') }}" alt="" srcset="">
+            <pre class="plagiarize">{{ report }}</pre>
+            
+        {% endif %}
+    </div>
+
+
+    <!-- Add Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 </html>
