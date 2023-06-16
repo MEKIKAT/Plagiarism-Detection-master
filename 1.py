@@ -20,7 +20,7 @@ def detect_plagiarism(submitted_text):
     plagiarism_report = ""
     submitted_text = submitted_text.translate(str.maketrans('', '', string.punctuation)).lower()
 
-    similarity_dict = {}  
+    similarity_dict = {}  # Dictionary to store document name, similarity percentage, and copied text percentage
 
     for filename in os.listdir(local_archive_directory):
         file_path = os.path.join(local_archive_directory, filename)
@@ -38,12 +38,17 @@ def detect_plagiarism(submitted_text):
         similarity_percentage = calculate_similarity_percentage(submitted_text, document_text)
         copied_text_percentage = calculate_copied_text_percentage(submitted_text, document_text)
 
-        if similarity_percentage == 100:
-            similarity_dict[filename] = copied_text_percentage
+        if similarity_percentage > 0:
+            similarity_dict[filename] = {
+                'similarity_percentage': similarity_percentage,
+                'copied_text_percentage': copied_text_percentage
+            }
 
     if similarity_dict:
-        for filename, copied_text_percentage in similarity_dict.items():
-            plagiarism_report += f"Document: {filename} : 100.0%, Percentage copied text in document: {copied_text_percentage:.2f}%\n"
+        for filename, percentages in similarity_dict.items():
+            similarity_percentage = percentages['similarity_percentage']
+            copied_text_percentage = percentages['copied_text_percentage']
+            plagiarism_report += f"Document: {filename} : {similarity_percentage}%, Percentage copied text in document: {copied_text_percentage:.2f}%\n"
 
     if not plagiarism_report:
         plagiarism_report = "No plagiarism detected."
